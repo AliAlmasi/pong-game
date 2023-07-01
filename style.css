@@ -13,6 +13,7 @@
 html {
   font-size: 62.5%;
   background: black;
+  color: lightgrey;
 }
 
 body {
@@ -25,13 +26,13 @@ body {
 }
 
 #game {
-  max-width: 640px;
-  max-height: 480px;
+  max-width: 64rem;
+  max-height: 48rem;
   width: 100%;
   height: 100%;
 }
 
 .text {
-  color: #d3d3d3;
   font-size: 1.4rem;
+  line-height: 1.2;
 }
