@@ -4,10 +4,15 @@ const grid = 15;
 const paddleHeight = grid * 5; // 80
 const maxPaddleY = canvas.height - grid - paddleHeight;
 
+const rightScoreEl = document.querySelector(`.score_right`);
+const leftScoreEl = document.querySelector(`.score_left`);
+
 var paddleSpeed = 6;
 var ballSpeed = 4;
 var audioVolume = 0.7;
 var missTimeout = 900;
+var rightplayer = 0;
+var leftplayer = 0;
 
 const wallHit = document.getElementById("wallHit");
 const paddleHit = document.getElementById("paddleHit");
@@ -99,6 +104,15 @@ function loop() {
     wallHit.play();
   }
 
+  if (ball.x < 0 && !ball.resetting) {
+    rightplayer++;
+    rightScoreEl.textContent = rightplayer;
+  }
+  if (ball.x > canvas.width && !ball.resetting) {
+    leftplayer++;
+    leftScoreEl.textContent = leftplayer;
+  }
+
   if ((ball.x < 0 || ball.x > canvas.width) && !ball.resetting) {
     ball.resetting = true;
     miss.play();
@@ -144,6 +158,9 @@ document.addEventListener("keydown", function (e) {
   } else if (e.key === "s") {
     leftPaddle.dy = paddleSpeed;
   }
+  if (e.key === "Escape") {
+    location.reload();
+  }
 });
 
 document.addEventListener("keyup", function (e) {
@@ -154,6 +171,10 @@ document.addEventListener("keyup", function (e) {
   if (e.key === "w" || e.key === "s") {
     leftPaddle.dy = 0;
   }
+});
+
+document.querySelector(`.reset`).addEventListener(`click`, () => {
+  location.reload();
 });
 
 requestAnimationFrame(loop);
