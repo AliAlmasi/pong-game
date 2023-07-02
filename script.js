@@ -94,11 +94,11 @@ function loop() {
   ball.x += ball.dx;
   ball.y += ball.dy;
 
-  if (ball.y < grid) {
+  if (ball.y < grid && !ball.resetting) {
     ball.y = grid;
     ball.dy *= -1;
     wallHit.play();
-  } else if (ball.y + grid > canvas.height - grid) {
+  } else if (ball.y + grid > canvas.height - grid && !ball.resetting) {
     ball.y = canvas.height - grid * 2;
     ball.dy *= -1;
     wallHit.play();
